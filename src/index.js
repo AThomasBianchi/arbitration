@@ -9,7 +9,7 @@ class App extends React.Component {
         return (
             <div>
                 {/* Timer */}
-                <Player />
+                <Player name="Mike Trout" team="Orlando" />
                 <Team team="Young Bucks" />
                 <Bid />
                 {/* Schedule / Results */}

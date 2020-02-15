@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Player = () => {
+const Player = props => {
     return (
         <div>
-            <h1>Mike Trout</h1>
-            <h2>Orlando Renegades</h2>
+            <h1>{props.name}</h1>
+            <h2>{props.team}</h2>
             {/* Contract Details */}
             {/* Scoring */}
         </div>
