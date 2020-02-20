@@ -5,12 +5,22 @@ import Team from './Team';
 import Player from './Player';
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            player: {
+                name: 'Mike Trout',
+                team: 'Orlando Renegade'
+            },
+            biddingTeam: 'Young Bucks'
+        }
+    }
     render() {
         return (
             <div>
                 {/* Timer */}
-                <Player name="Mike Trout" team="Orlando" />
-                <Team team="Young Bucks" />
+                <Player name={this.state.player.name} team={this.state.player.team} />
+                <Team team={this.state.biddingTeam} />
                 <Bid />
                 {/* Schedule / Results */}
             </div>
