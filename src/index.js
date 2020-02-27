@@ -11,22 +11,39 @@ class App extends React.Component {
             player: {
                 name: 'Mike Trout',
                 team: 'Orlando Renegades',
-                arbYear: 1
+                arbYear: 1,
+                bidValue: '',
             },
-            biddingTeam: 'Young Bucks',
-            bid: '',
+            bidder: {
+                team: 'Young Bucks',
+                bid: '',
+            }
+
+
         };
-        this.handleChange = this.handleChange.bind(this);
+        this.handleBidChange = this.handleBidChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleDecline = this.handleDecline.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({ bid: event.target.value })
+    handleBidChange(event) {
+        let newBidderState = { ...this.state.bidder };
+        newBidderState.bid = event.target.value;
+        this.setState({
+            bidder: newBidderState,
+        });
+    }
+
+    calculateBidValue(bid) {
+        const MULTIPLIERS = { 1: .4, 2: .6, 3: .8 };
+        let value = MULTIPLIERS[this.state.player.arbYear] * bid;
+        value = value > 1 ? value : 1;
+        console.log(value);
     }
 
     handleSubmit(event) {
-        alert('you submitted a bid of ' + this.state.bid);
+        this.calculateBidValue(this.state.bidder.bid);
+        alert('you submitted a bid of ' + this.state.bidder.bid);
         event.preventDefault();
     }
 
@@ -36,7 +53,6 @@ class App extends React.Component {
     }
 
     render() {
-        // const calculated_arb = 
 
         return (
             <div>
@@ -46,12 +62,12 @@ class App extends React.Component {
                     team={this.state.player.team}
 
                 />
-                <Team team={this.state.biddingTeam} />
+                <Team team={this.state.bidder.team} />
                 <Bid
                     handleSubmit={this.handleSubmit}
                     handleDecline={this.handleDecline}
-                    handleChange={this.handleChange}
-                    bid={this.state.bid}
+                    handleChange={this.handleBidChange}
+                    bid={this.state.bidder.bid}
                 />
                 {/* Schedule / Results */}
             </div>
